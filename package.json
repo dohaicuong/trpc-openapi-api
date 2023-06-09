@@ -9,8 +9,9 @@
     "dev": "dotenv node-dev ./src/index.ts",
     "lint": "rome check ./src/",
     "format": "rome format ./src/",
-    "test": "dotenv -e .env.test vitest",
-    "coverage": "dotenv -e .env.test vitest run --coverage"
+    "test": "dotenv -e .env.test -- vitest",
+    "test:ui": "dotenv -e .env.test -- vitest --ui",
+    "coverage": "dotenv -e .env.test -- vitest run --coverage"
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
@@ -28,6 +29,8 @@
   "devDependencies": {
     "@types/node": "^20.2.5",
     "@types/uuid": "^9.0.2",
+    "@vitest/coverage-v8": "^0.32.0",
+    "@vitest/ui": "^0.32.0",
     "dotenv-cli": "^7.2.1",
     "node-dev": "^8.0.0",
     "rome": "12.1.3",
