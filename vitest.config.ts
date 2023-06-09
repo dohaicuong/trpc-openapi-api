@@ -5,10 +5,7 @@ export default defineConfig({
     include: ['./src/**/*.test.ts'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'cobertura'],
+      reporter: ['text', 'html', 'cobertura'],
     },
-    deps: {
-      inline: ['default-composer'],
-    }
   },
 })
