@@ -2,7 +2,6 @@ import fastify from 'fastify'
 import cors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
-import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
 import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from 'trpc-openapi'
 
 import { appRouter } from './router'
@@ -13,13 +12,6 @@ const app = fastify({ logger: true })
 
 async function main() {
   await app.register(cors)
-
-  // Handle incoming tRPC requests
-  await app.register(fastifyTRPCPlugin, {
-    prefix: '/trpc',
-    useWss: false,
-    trpcOptions: { router: appRouter, createContext },
-  })
 
   const openApiDocument = generateOpenApiDocument(appRouter, {
     title: SERVICE.name,
