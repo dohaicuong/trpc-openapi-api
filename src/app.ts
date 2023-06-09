@@ -12,7 +12,7 @@ const openApiDocument = generateOpenApiDocument(appRouter, {
   title: SERVICE.name,
   version: SERVICE.version,
   baseUrl: 'http://localhost:3000/api',
-  docsUrl: 'http://localhost:3000/docs'
+  docsUrl: 'http://localhost:3000/docs',
 })
 
 export const app = fastify({ logger: ENV.NODE_ENV !== 'test' })
@@ -30,6 +30,6 @@ export const app = fastify({ logger: ENV.NODE_ENV !== 'test' })
   .register(fastifySwaggerUI, {
     routePrefix: '/docs',
     uiConfig: {
-      displayOperationId: true
+      displayOperationId: true,
     },
   })

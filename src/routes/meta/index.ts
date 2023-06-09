@@ -12,17 +12,19 @@ export const metaRouter = t.router({
       },
     })
     .input(z.object({}))
-    .output(z.object({
-      service: z.string(),
-      version: z.string(),
-      env: z.string(),
-      // tag: z.string(),
-      time: z.number(),
-    }))
+    .output(
+      z.object({
+        service: z.string(),
+        version: z.string(),
+        env: z.string(),
+        // tag: z.string(),
+        time: z.number(),
+      }),
+    )
     .query(() => ({
       service: SERVICE.name,
       version: SERVICE.version,
       env: ENV.ENV,
-      time: parseInt(`${new Date().getTime() / 1000}`)
-    }))
+      time: parseInt(`${new Date().getTime() / 1000}`),
+    })),
 })

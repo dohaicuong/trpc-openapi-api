@@ -7,14 +7,14 @@ import { FastifyRequest } from 'fastify'
 type Context = {
   req: FastifyRequest
 }
-export const createContext = async ({ req, res }: CreateFastifyContextOptions): Promise<Context> => {
+export const createContext = async ({
+  req,
+  res,
+}: CreateFastifyContextOptions): Promise<Context> => {
   const requestId = uuid()
   res.header('x-request-id', requestId)
 
   return { req }
 }
 
-export const t = initTRPC
-  .meta<OpenApiMeta>()
-  .context<Context>()
-  .create()
+export const t = initTRPC.meta<OpenApiMeta>().context<Context>().create()

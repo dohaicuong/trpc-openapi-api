@@ -3,7 +3,7 @@ import { TRPCError } from '@trpc/server'
 
 export const isAuth = t.middleware(async ({ ctx, next }) => {
   const auth = ctx.req.headers.authorization
-  
+
   const isBearerToken = auth?.startsWith('Bearer ')
   if (!isBearerToken) {
     throw new TRPCError({ code: 'UNAUTHORIZED' })
@@ -22,13 +22,13 @@ export const isAuth = t.middleware(async ({ ctx, next }) => {
 
   const jwtOutput = {
     token: jwt,
-    payload: jwtPayload.payload
+    payload: jwtPayload.payload,
   }
   return next({
     ctx: {
       ...ctx,
-      jwt: jwtOutput
-    }
+      jwt: jwtOutput,
+    },
   })
 })
 
@@ -38,33 +38,31 @@ export type DecodeJwtFailed = {
 }
 
 export type DecodeJwtSuccess = {
-  name: 'DecodeJwtSuccess',
+  name: 'DecodeJwtSuccess'
   payload: Go1JwtPayload
 }
 
-export type DecodeJwtPayload =
-  | DecodeJwtFailed
-  | DecodeJwtSuccess
+export type DecodeJwtPayload = DecodeJwtFailed | DecodeJwtSuccess
 
 export const decodeJwt = (jwt: string): DecodeJwtPayload => {
   const [_header, encoded_payload] = jwt.split('.')
-  if (!encoded_payload) return {
-    name: 'DecodeJwtFailed',
-    message: 'Invalid jwt token'
-  }
+  if (!encoded_payload)
+    return {
+      name: 'DecodeJwtFailed',
+      message: 'Invalid jwt token',
+    }
 
-  const string_payload = Buffer
-    .from(encoded_payload, 'base64')
-    .toString('ascii')
+  const string_payload = Buffer.from(encoded_payload, 'base64').toString(
+    'ascii',
+  )
 
   try {
     const jwtPayload = JSON.parse(string_payload) as Go1JwtPayload
     return {
       name: 'DecodeJwtSuccess',
-      payload: jwtPayload
+      payload: jwtPayload,
     }
-  }
-  catch(error) {
+  } catch (error) {
     return {
       name: 'DecodeJwtFailed',
       message: `error parsing jwt payload, ${error}`,
@@ -96,7 +94,7 @@ export type JwtUser = {
   accounts: JwtAccount[]
 }
 export type JwtUserRole = 'Admin on #Accounts' | 'developer'
-  
+
 export type JwtAccount = {
   id: number
   instance: string
@@ -107,4 +105,9 @@ export type JwtAccount = {
   partner_portal_id: number
   ulid: string
 }
-export type JwtAccountRole = 'administrator' | 'content administrator' | 'tutor' | 'manager' | 'Student'
+export type JwtAccountRole =
+  | 'administrator'
+  | 'content administrator'
+  | 'tutor'
+  | 'manager'
+  | 'Student'
