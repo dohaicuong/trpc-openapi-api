@@ -11,8 +11,8 @@ describe('GET /user', () => {
       method: 'GET',
       url: '/api/user',
       headers: {
-        authorization: `Bearer ${validJwt}`
-      }
+        authorization: `Bearer ${validJwt}`,
+      },
     })
     const payload = await res.json()
 
@@ -27,7 +27,7 @@ describe('GET /user', () => {
       method: 'GET',
       url: '/api/user',
     })
-    
+
     const data = await res.json()
 
     expect(res.statusCode).toBe(401)
@@ -40,8 +40,8 @@ describe('GET /user', () => {
       method: 'GET',
       url: '/api/user',
       headers: {
-        authorization: 'Bearer invalid_jwt'
-      }
+        authorization: 'Bearer invalid_jwt',
+      },
     })
 
     const data = await res.json()
@@ -50,5 +50,4 @@ describe('GET /user', () => {
     expect(data.message).toBe('UNAUTHORIZED')
     expect(data.code).toBe('UNAUTHORIZED')
   })
-
 })
