@@ -1,4 +1,4 @@
-- testing
-- logging ??
-- datadog
-- database access
+[x] testing
+[ ] logging ??
+[ ] datadog
+[ ] database access

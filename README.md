@@ -15,3 +15,12 @@ change the env value if needed
 ```
 pnpm dev
 ```
+
+### Testing
+```
+// watching
+pnpm test
+
+// coverage
+pnpm coverage
+```
