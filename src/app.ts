@@ -1,8 +1,11 @@
+import './tracer'
+
 import fastify from 'fastify'
 import cors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from 'trpc-openapi'
+import { v4 as uuid } from 'uuid'
 
 import { appRouter } from './router'
 import { createContext } from './builder'
@@ -15,7 +18,10 @@ const openApiDocument = generateOpenApiDocument(appRouter, {
   docsUrl: 'http://localhost:3000/docs',
 })
 
-export const app = fastify({ logger: ENV.NODE_ENV !== 'test' })
+export const app = fastify({
+  logger: ENV.NODE_ENV !== 'test',
+  genReqId: () => uuid(),
+})
   .register(cors)
   .get('/openapi.json', () => openApiDocument)
   .register(fastifyTRPCOpenApiPlugin, {

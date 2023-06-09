@@ -1,7 +1,6 @@
 import { initTRPC } from '@trpc/server'
 import { OpenApiMeta } from 'trpc-openapi'
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
-import { v4 as uuid } from 'uuid'
 import { FastifyRequest } from 'fastify'
 
 type Context = {
@@ -9,11 +8,7 @@ type Context = {
 }
 export const createContext = async ({
   req,
-  res,
 }: CreateFastifyContextOptions): Promise<Context> => {
-  const requestId = uuid()
-  res.header('x-request-id', requestId)
-
   return { req }
 }
 
