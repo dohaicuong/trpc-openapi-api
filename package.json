@@ -15,7 +15,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*": "npm run format --write"
+    "*": "npm run format -- --write"
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
