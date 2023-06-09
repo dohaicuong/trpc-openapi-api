@@ -5,14 +5,19 @@
   "author": "",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "start": "ts-node ./src/index.ts",
     "dev": "dotenv node-dev ./src/index.ts",
     "lint": "rome check ./src/",
     "format": "rome format ./src/",
     "test": "dotenv -e .env.test -- vitest",
     "test:ui": "dotenv -e .env.test -- vitest --ui",
-    "coverage": "dotenv -e .env.test -- vitest run --coverage",
-    "prepare": "husky install"
+    "coverage": "dotenv -e .env.test -- vitest run --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*": "npm run format -- --write"
