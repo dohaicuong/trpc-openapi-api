@@ -3,6 +3,7 @@ import { createDBPool } from './db'
 import { createMigrator } from './migrations'
 import { SERVICE } from '../config'
 
+// TODO: complete after a little more research
 export const dbPlugin = fp(
   () => {
     const db = createDBPool({
