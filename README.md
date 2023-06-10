@@ -4,12 +4,7 @@
 ```
 pnpm i
 ```
-
-### Setup environment
-```
-cp .env.example .env
-```
-change the env value if needed
+change the env value in `.env` if needed
 
 ### Starting server
 ```

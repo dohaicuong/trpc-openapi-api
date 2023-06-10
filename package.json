@@ -5,7 +5,8 @@
   "author": "",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install && npm run setup:env",
+    "setup:env": "cp .env.example .env",
     "start": "ts-node ./src/index.ts",
     "dev": "dotenv node-dev ./src/index.ts",
     "lint": "rome check ./src/",
