@@ -1,5 +1,5 @@
 [x] testing
 [X] lint stage format
-[X] logging ??
+[X] logging
 [X] datadog
-[ ] database access
+[X] database access
