@@ -7,9 +7,10 @@ import fastifySwaggerUI from '@fastify/swagger-ui'
 import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from 'trpc-openapi'
 import { v4 as uuid } from 'uuid'
 
-import { appRouter } from './router'
-import { createContext } from './builder'
+import { appRouter } from './routes/router'
+import { createContext } from './routes/builder'
 import { ENV, SERVICE } from './config'
+import { dbPlugin } from './db/dbPlugin'
 
 const openApiDocument = generateOpenApiDocument(appRouter, {
   title: SERVICE.name,
@@ -22,6 +23,7 @@ export const app = fastify({
   logger: ENV.NODE_ENV !== 'test',
   genReqId: () => uuid(),
 })
+  .register(dbPlugin)
   .register(cors)
   .get('/openapi.json', () => openApiDocument)
   .register(fastifyTRPCOpenApiPlugin, {

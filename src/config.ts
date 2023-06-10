@@ -9,6 +9,10 @@ const EnvironmentSchema = z.object({
     (str) => (typeof str === 'string' ? parseInt(str) : str),
     z.number(),
   ),
+  MYSQL_HOST: z.string(),
+  MYSQL_DATABASE: z.string(),
+  MYSQL_USER: z.string(),
+  MYSQL_PASSWORD: z.string(),
 })
 export const ENV = EnvironmentSchema.parse(process.env)
 

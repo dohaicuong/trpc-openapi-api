@@ -3,12 +3,12 @@ version: '3.3'
 services:
   db:
     image: mysql:8.0.33
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
+    restart: unless-stopped
     env_file: .env
     ports:
       - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
 
 volumes:
   db_data: {}
