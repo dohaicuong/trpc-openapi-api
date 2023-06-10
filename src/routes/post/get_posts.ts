@@ -20,9 +20,28 @@ export const get_posts = t.procedure
   )
   .output(z.array(createSelectSchema(posts_table)))
   .query(async ({ input, ctx }) => {
-    return ctx.db
-      .select()
-      .from(posts_table)
+    const posts = await ctx.db
+      .selectFrom('posts')
       .limit(input.limit)
       .offset(input.offset)
+      .execute()
+      .catch((error) => {
+        console.log(error)
+      })
+
+    console.log(
+      '__________________________________________________________________',
+    )
+    console.log(posts)
+    console.log(
+      '__________________________________________________________________',
+    )
+
+    return posts
+
+    // return ctx.db
+    //   .select()
+    //   .from(posts_table)
+    //   .limit(input.limit)
+    //   .offset(input.offset)
   })

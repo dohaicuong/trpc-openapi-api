@@ -35,6 +35,7 @@
     "drizzle-zod": "^0.4.3",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
+    "kysely": "^0.25.0",
     "mysql2": "^3.3.3",
     "trpc-openapi": "^1.2.0",
     "ts-node": "^10.9.1",

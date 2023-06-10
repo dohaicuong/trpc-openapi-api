@@ -1,6 +1,6 @@
 import { FastifyPluginCallback } from 'fastify'
 import fp from 'fastify-plugin'
-import { migration } from './db'
+import { migration } from './migration'
 
 const dbPluginCallback: FastifyPluginCallback = async (app) => {
   app.addHook('onReady', async () => {
