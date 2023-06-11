@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { isAuth } from '../../middlewares/isAuth'
+import { isAuth } from '../__middlewares/isAuth'
 import { t } from '../builder'
 import { db } from '../../db'
 import { PostSchema } from './schema'

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { t } from '../builder'
-import { isAuth } from '../../middlewares/isAuth'
+import { isAuth } from '../__middlewares/isAuth'
 
 export const get_user = t.procedure
   .meta({
