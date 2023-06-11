@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  author_id Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

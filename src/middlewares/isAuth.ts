@@ -1,4 +1,4 @@
-import { t } from '../builder'
+import { t } from '../routes/builder'
 import { TRPCError } from '@trpc/server'
 
 export const isAuth = t.middleware(async ({ ctx, next }) => {

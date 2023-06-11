@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { t } from '../../builder'
+import { t } from '../builder'
 import { isAuth } from '../../middlewares/isAuth'
 
 export const get_user = t.procedure
@@ -8,6 +8,7 @@ export const get_user = t.procedure
       method: 'GET',
       path: '/user',
       protect: true,
+      tags: ['user'],
     },
   })
   .use(isAuth)

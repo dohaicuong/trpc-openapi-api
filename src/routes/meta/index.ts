@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { t } from '../../builder'
+import { t } from '../builder'
 
 import { ENV, SERVICE } from '../../config'
 

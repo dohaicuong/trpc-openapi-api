@@ -7,15 +7,14 @@ import fastifySwaggerUI from '@fastify/swagger-ui'
 import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from 'trpc-openapi'
 import { v4 as uuid } from 'uuid'
 
-import { appRouter } from './router'
-import { createContext } from './builder'
+import { appRouter } from './routes/router'
+import { createContext } from './routes/builder'
 import { ENV, SERVICE } from './config'
 
 const openApiDocument = generateOpenApiDocument(appRouter, {
   title: SERVICE.name,
   version: SERVICE.version,
-  baseUrl: 'http://localhost:3000/api',
-  docsUrl: 'http://localhost:3000/docs',
+  baseUrl: '/api',
 })
 
 export const app = fastify({
