@@ -1,5 +1,8 @@
-generator client {
-  provider = "prisma-client-js"
+generator kysely {
+  provider     = "prisma-kysely"
+  output       = "../src/db"
+  fileName     = "types.ts"
+  enumFileName = "enums.ts"
 }
 
 datasource db {
@@ -9,10 +12,9 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   title     String
   content   String
   author_id Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

@@ -22,10 +22,20 @@ export const create_post = t.procedure
   )
   .output(PostSchema)
   .mutation(async ({ ctx, input }) => {
-    return db.post.create({
-      data: {
-        ...input,
+    const result = await db
+      .insertInto('Post')
+      .values({
+        title: input.title,
+        content: input.content,
         author_id: ctx.jwt.payload.object.content.id,
-      },
-    })
+      })
+      .executeTakeFirstOrThrow()
+
+    const post = await db
+      .selectFrom('Post')
+      .selectAll()
+      .where('Post.id', '=', Number(result.insertId))
+      .execute()
+
+    return post[0]
   })

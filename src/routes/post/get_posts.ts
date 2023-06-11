@@ -20,8 +20,10 @@ export const get_posts = t.procedure
   )
   .output(z.array(PostSchema))
   .query(async ({ input }) => {
-    return db.post.findMany({
-      take: input.limit,
-      skip: input.offset,
-    })
+    return db
+      .selectFrom('Post')
+      .selectAll()
+      .limit(input.limit)
+      .offset(input.offset)
+      .execute()
   })
