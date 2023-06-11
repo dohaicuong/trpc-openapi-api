@@ -42,7 +42,32 @@ describe('[GET /posts] get_posts', () => {
     expect(payload).toHaveLength(0)
   })
 
-  it('should return first 50 posts if no limit, offset is passed', async () => {
+  it('should return correct pagination data', async () => {
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/posts?limit=20&offset=25',
+      headers: {
+        authorization: `Bearer ${validJwt}`,
+      },
+    })
+    const payload: Payload = await res.json()
+
+    expect(payload).toHaveLength(20)
+    expect(payload[0]).toMatchObject({
+      id: 'POST:26',
+      title: 'title',
+      content: 'content',
+      author_id: 25,
+    })
+    expect(payload[payload.length - 1]).toMatchObject({
+      id: 'POST:45',
+      title: 'title',
+      content: 'content',
+      author_id: 44,
+    })
+  })
+
+  it('should return correct pagination data if no limit, offset is passed', async () => {
     const res = await app.inject({
       method: 'GET',
       url: '/api/posts',
@@ -68,31 +93,6 @@ describe('[GET /posts] get_posts', () => {
       author_id: 49,
       createdAt: now.toISOString(),
       updatedAt: now.toISOString(),
-    })
-  })
-
-  it('should return correct pagination data', async () => {
-    const res = await app.inject({
-      method: 'GET',
-      url: '/api/posts?limit=20&offset=25',
-      headers: {
-        authorization: `Bearer ${validJwt}`,
-      },
-    })
-    const payload: Payload = await res.json()
-
-    expect(payload).toHaveLength(20)
-    expect(payload[0]).toMatchObject({
-      id: 'POST:26',
-      title: 'title',
-      content: 'content',
-      author_id: 25,
-    })
-    expect(payload[payload.length - 1]).toMatchObject({
-      id: 'POST:45',
-      title: 'title',
-      content: 'content',
-      author_id: 44,
     })
   })
 
