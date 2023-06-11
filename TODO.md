@@ -2,4 +2,4 @@
 [X] lint stage format
 [X] logging ??
 [X] datadog
-[ ] database access
+[X] database access
