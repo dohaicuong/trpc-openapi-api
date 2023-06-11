@@ -16,6 +16,9 @@ pnpm dev
 // watching
 pnpm test
 
-// coverage
+// with web ui
+pnpm test:ui
+
+// test coverage
 pnpm coverage
 ```
