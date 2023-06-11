@@ -16,7 +16,6 @@ export const isAuth = t.middleware(async ({ ctx, next }) => {
 
   const jwtPayload = decodeJwt(jwt)
   if (jwtPayload.name === 'DecodeJwtFailed') {
-    console.log(jwtPayload.message)
     throw new TRPCError({ code: 'UNAUTHORIZED' })
   }
 
