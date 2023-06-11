@@ -7,7 +7,7 @@ app
     app.swagger()
     console.log(`
       Server started on ${address}/api
-      Swagger UI: http://localhost:3000/docs
+      Swagger UI: ${address}/docs
     `)
   })
   .catch((err) => {
