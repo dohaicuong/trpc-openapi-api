@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { app } from '../../app'
-import { signTestJwt } from '../../_test_helpers'
+import { signTestJwt } from '../../tests/signTestJwt'
 
 describe('GET /user', () => {
   it('should return user data from jwt', async () => {
