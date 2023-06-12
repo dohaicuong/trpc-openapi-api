@@ -25,7 +25,6 @@
     "forceConsistentCasingInFileNames": true,
   },
   "include": [
-    "src",
-    "src/_tests/signTestJwt.ts"
+    "src"
   ],
 }

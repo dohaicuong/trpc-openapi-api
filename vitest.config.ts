@@ -7,6 +7,6 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html', 'cobertura'],
     },
-    setupFiles: ['./src/tests/dbMock.ts'],
+    setupFiles: ['./src/_tests/dbMock.ts'],
   },
 })
