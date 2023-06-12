@@ -1,6 +1,8 @@
 import tracer from 'dd-trace'
 import { ENV } from './config'
 
-tracer.init({
-  env: ENV.ENV,
-})
+if (ENV.NODE_ENV !== 'test' && ENV.ENV !== 'local') {
+  tracer.init({
+    env: ENV.ENV,
+  })
+}
