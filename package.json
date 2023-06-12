@@ -5,8 +5,7 @@
   "author": "",
   "private": true,
   "scripts": {
-    "prepare": "husky install && npm run setup:env",
-    "setup:env": "cp .env.example .env",
+    "prepare": "husky install",
     "start": "ts-node ./src/index.ts",
     "dev": "dotenv node-dev ./src/index.ts",
     "test": "dotenv -e .env.test -- vitest",

@@ -1,17 +1,29 @@
 ## Getting start
 
-### Install dependencies
+#### Install dependencies
 ```
 pnpm i
 ```
+
+#### Setup local env
+```
+cp .env.example .env
+```
 change the env value in `.env` if needed
 
-### Starting server
+#### Start up db and run migration
+```
+docker compose up -d
+npx prisma migrate dev
+```
+
+#### Starting server
 ```
 pnpm dev
 ```
 
-### Testing
+## Testing
+change the env value in `.env.test` if needed
 ```
 // watching
 pnpm test
