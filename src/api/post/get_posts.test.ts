@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 
 import { app } from '../../app'
-import { signTestJwt } from '../../tests/signTestJwt'
-import { dbMock } from '../../tests/dbMock'
+import { signTestJwt } from '../../_tests/signTestJwt'
+import { dbMock } from '../../_tests/dbMock'
 import { Post, PrismaPromise } from '@prisma/client'
 
 import { inferRouterOutputs } from '@trpc/server'

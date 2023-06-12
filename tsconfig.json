@@ -26,6 +26,6 @@
   },
   "include": [
     "src",
-    "src/tests/signTestJwt.ts"
+    "src/_tests/signTestJwt.ts"
   ],
 }

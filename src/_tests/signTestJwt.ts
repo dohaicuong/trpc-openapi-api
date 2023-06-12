@@ -1,4 +1,4 @@
-import { Go1JwtPayload } from '../routes/__middlewares/isAuth'
+import { Go1JwtPayload } from '../api/__middlewares/isAuth'
 
 export const signTestJwt = (test_payload?: Partial<Go1JwtPayload>): string => {
   const payload: Go1JwtPayload = {
