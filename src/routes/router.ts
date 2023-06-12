@@ -1,8 +1,8 @@
 import { t } from './builder'
-import { metaRouter } from './meta'
-import { postRouter } from './post'
-import { userRouter } from './user'
 
-export const appRouter = t.mergeRouters(metaRouter, userRouter, postRouter)
+import { userRouter } from './user'
+import { postRouter } from './post'
+
+export const appRouter = t.mergeRouters(userRouter, postRouter)
 
 export type AppRouter = typeof appRouter

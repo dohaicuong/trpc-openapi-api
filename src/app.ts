@@ -38,3 +38,15 @@ export const app = fastify({
       displayOperationId: true,
     },
   })
+  // SERVICE META ROUTES
+  .get('/', (_req, reply) => {
+    reply.code(200).send({
+      service: SERVICE.name,
+      version: SERVICE.version,
+      env: ENV.ENV,
+      time: parseInt(`${new Date().getTime() / 1000}`),
+    })
+  })
+  .get('/healthz', (_req, reply) => {
+    reply.code(200).send('ok')
+  })
