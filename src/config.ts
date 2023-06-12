@@ -24,5 +24,4 @@ const EnvironmentSchema = z.object({
   //   z.array(z.enum(['australiaeast', 'northeurope', 'centralus']))
   // ),
 })
-export const ENV = EnvironmentSchema.parse(process.env);
-
+export const ENV = EnvironmentSchema.parse(process.env)
