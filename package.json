@@ -14,11 +14,6 @@
     "lint": "rome check ./src/",
     "format": "rome format ./src/"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*": "npm run format -- --write"
   },
