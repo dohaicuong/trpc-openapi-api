@@ -34,3 +34,8 @@ pnpm test:ui
 // test coverage
 pnpm coverage
 ```
+
+## Environment variable
+more environment variables that lived on k8s pod
+- QA: https://code.go1.com.au/domain-infrastructure/k8s/config-map/-/blob/master/qa.config.k8s.yaml
+- PROD: https://code.go1.com.au/domain-infrastructure/k8s/config-map/-/blob/master/prod.config.k8s.yaml

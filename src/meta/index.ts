@@ -8,8 +8,9 @@ const metaPluginCallback: FastifyPluginCallback = async (app) => {
       reply.code(200).send({
         service: SERVICE.name,
         version: SERVICE.version,
-        env: ENV.ENV,
-        time: parseInt(`${new Date().getTime() / 1000}`),
+        tag: ENV.DD_VERSION,
+        env: ENV.DD_ENV,
+        time: Date.now(),
       })
     })
     .get('/healthz', (_req, reply) => {
