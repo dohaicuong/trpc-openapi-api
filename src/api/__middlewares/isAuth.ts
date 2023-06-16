@@ -1,35 +1,58 @@
 import { t } from '../builder'
 import { TRPCError } from '@trpc/server'
 
-export const isAuth = t.middleware(async ({ ctx, next }) => {
-  const auth = ctx.req.headers.authorization
+export type IsAuthOptions = {
+  userRoles: JwtUserRole[]
+  accountRoles: JwtAccountRole[]
+}
+export const isAuth = ({ userRoles, accountRoles }: IsAuthOptions) =>
+  t.middleware(async ({ ctx, next }) => {
+    const auth = ctx.req.headers.authorization
 
-  const isBearerToken = auth?.startsWith('Bearer ')
-  if (!isBearerToken) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' })
-  }
+    const isBearerToken = auth?.startsWith('Bearer ')
+    if (!isBearerToken) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
 
-  const jwt = auth?.replace('Bearer ', '')
-  if (!jwt) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' })
-  }
+    const jwt = auth?.replace('Bearer ', '')
+    if (!jwt) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
 
-  const jwtPayload = decodeJwt(jwt)
-  if (jwtPayload.name === 'DecodeJwtFailed') {
-    throw new TRPCError({ code: 'UNAUTHORIZED' })
-  }
+    const jwtPayload = decodeJwt(jwt)
+    if (jwtPayload.name === 'DecodeJwtFailed') {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
 
-  const jwtOutput = {
-    token: jwt,
-    payload: jwtPayload.payload,
-  }
-  return next({
-    ctx: {
-      ...ctx,
-      jwt: jwtOutput,
-    },
+    const user = jwtPayload.payload.object.content
+    const checkingRolesNeeded =
+      userRoles.length !== 0 && accountRoles.length !== 0
+    const hasSufficientUserRoles = userRoles.some((role) =>
+      user.roles.includes(role),
+    )
+    const hasSufficientAccountRoles = user.accounts.some((account) => {
+      // also checking request portalID vs account.portal_id ??
+      return accountRoles.some((role) => account.roles.includes(role))
+    })
+    if (
+      checkingRolesNeeded &&
+      !hasSufficientUserRoles &&
+      !hasSufficientAccountRoles
+    ) {
+      throw new TRPCError({ code: 'FORBIDDEN' })
+    }
+
+    const jwtOutput = {
+      token: jwt,
+      payload: jwtPayload.payload,
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        jwt: jwtOutput,
+      },
+    })
   })
-})
 
 export type DecodeJwtFailed = {
   name: 'DecodeJwtFailed'

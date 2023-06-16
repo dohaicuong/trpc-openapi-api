@@ -11,7 +11,12 @@ export const get_user = t.procedure
       tags: ['user'],
     },
   })
-  .use(isAuth)
+  .use(
+    isAuth({
+      userRoles: [],
+      accountRoles: [],
+    }),
+  )
   .input(z.object({}))
   .output(
     z.object({

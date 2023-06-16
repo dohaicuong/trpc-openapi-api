@@ -13,7 +13,12 @@ export const create_post = t.procedure
       tags: ['post'],
     },
   })
-  .use(isAuth)
+  .use(
+    isAuth({
+      userRoles: [],
+      accountRoles: [],
+    }),
+  )
   .input(
     z.object({
       title: z.string(),
